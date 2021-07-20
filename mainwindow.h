@@ -28,6 +28,10 @@ private slots:
 
     void on_azul_clicked();
 
+    void on_amarelo_released();
+
+    void on_amarelo_pressed();
+
 private:
     Ui::MainWindow *ui;
 };

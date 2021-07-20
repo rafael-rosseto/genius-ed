@@ -2,11 +2,11 @@
 #include "ui_mainwindow.h"
 #include <QTime>
 
-int level = 1;
+int level = 3;
 
-void delay(int seconds)
+void delay(int miliseconds)
 {
-    QTime dieTime= QTime::currentTime().addSecs(seconds);
+    QTime dieTime= QTime::currentTime().addMSecs(miliseconds);
     while (QTime::currentTime() < dieTime)
         QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
 }
@@ -19,26 +19,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->play->clearFocus();
 
-    QPalette amarelo = ui->amarelo->palette();
-    QPalette verde = ui->verde->palette();
-    QPalette vermelho = ui->vermelho->palette();
-    QPalette azul = ui->azul->palette();
-    amarelo.setColor(QPalette::Button, Qt::yellow);
-    ui->amarelo->setAutoFillBackground(true);
-    ui->amarelo->setPalette(amarelo);
-    ui->amarelo->show();
-    verde.setColor(QPalette::Button, Qt::green);
-    ui->verde->setAutoFillBackground(true);
-    ui->verde->setPalette(verde);
-    ui->verde->show();
-    vermelho.setColor(QPalette::Button, Qt::red);
-    ui->vermelho->setAutoFillBackground(true);
-    ui->vermelho->setPalette(vermelho);
-    ui->vermelho->show();
-    azul.setColor(QPalette::Button, Qt::blue);
-    ui->azul->setAutoFillBackground(true);
-    ui->azul->setPalette(azul);
-    ui->azul->show();
+    ui->amarelo->setStyleSheet("background: yellow");
+    ui->verde->setStyleSheet("background: green");
+    ui->vermelho->setStyleSheet("background: red");
+    ui->azul->setStyleSheet("background: blue");
 }
 
 MainWindow::~MainWindow()
@@ -49,35 +33,68 @@ MainWindow::~MainWindow()
 void MainWindow::on_play_clicked()
 {
     ui->play->clearFocus();
+
+    ui->amarelo->setStyleSheet("background: palette(window)");
+    ui->verde->setStyleSheet("background: palette(window)");
+    ui->vermelho->setStyleSheet("background: palette(window)");
+    ui->azul->setStyleSheet("background: palette(window)");
+
+    delay(800);
+
+    for(int i = 1; i <= level; i++)
+    {
+        //for(int j = 1; j <= i; j++)
+        //{
+            srand(time(0));
+            int aux = rand() % 4;
+            if(aux == 0)
+            {
+                ui->amarelo->setStyleSheet("background: yellow");
+                delay(600);
+                ui->amarelo->setStyleSheet("background: palette(window)");
+            }
+            else if(aux == 1)
+            {
+                ui->verde->setStyleSheet("background: green");
+                delay(600);
+                ui->verde->setStyleSheet("background: palette(window)");
+            }
+            else if(aux == 2)
+            {
+                ui->vermelho->setStyleSheet("background: red");
+                delay(600);
+                ui->vermelho->setStyleSheet("background: palette(window)");
+            }
+            else
+            {
+                ui->azul->setStyleSheet("background: blue");
+                delay(600);
+                ui->azul->setStyleSheet("background: palette(window)");
+            }
+            delay(600);
+        //}
+    }
 }
 
 
 void MainWindow::on_reset_clicked()
 {
     ui->reset->clearFocus();
+    ui->amarelo->setStyleSheet("background: yellow");
+    ui->verde->setStyleSheet("background: green");
+    ui->vermelho->setStyleSheet("background: red");
+    ui->azul->setStyleSheet("background: blue");
 }
 
 
-void MainWindow::on_amarelo_clicked()
+void MainWindow::on_amarelo_pressed()
 {
-    ui->amarelo->clearFocus();
+    ui->amarelo->setStyleSheet("background: yellow");
 }
 
 
-void MainWindow::on_verde_clicked()
+void MainWindow::on_amarelo_released()
 {
-    ui->verde->clearFocus();
-}
-
-
-void MainWindow::on_vermelho_clicked()
-{
-    ui->vermelho->clearFocus();
-}
-
-
-void MainWindow::on_azul_clicked()
-{
-    ui->azul->clearFocus();
+    ui->amarelo->setStyleSheet("background: palette(window)");
 }
 
