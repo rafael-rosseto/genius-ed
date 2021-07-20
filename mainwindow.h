@@ -15,6 +15,19 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_play_clicked();
+
+    void on_reset_clicked();
+
+    void on_amarelo_clicked();
+
+    void on_verde_clicked();
+
+    void on_vermelho_clicked();
+
+    void on_azul_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

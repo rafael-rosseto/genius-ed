@@ -1,5 +1,15 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QTime>
+
+int level = 1;
+
+void delay(int seconds)
+{
+    QTime dieTime= QTime::currentTime().addSecs(seconds);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+}
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -7,19 +17,12 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    QPalette painel = ui->painel->palette();
+    ui->play->clearFocus();
+
     QPalette amarelo = ui->amarelo->palette();
     QPalette verde = ui->verde->palette();
     QPalette vermelho = ui->vermelho->palette();
     QPalette azul = ui->azul->palette();
-
-    // set black background on panel
-    painel.setColor(QPalette::Background, Qt::black);
-    ui->painel->setAutoFillBackground(true);
-    ui->painel->setPalette(painel);
-    ui->painel->show();
-
-    // set colored background on buttons
     amarelo.setColor(QPalette::Button, Qt::yellow);
     ui->amarelo->setAutoFillBackground(true);
     ui->amarelo->setPalette(amarelo);
@@ -41,5 +44,40 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::on_play_clicked()
+{
+    ui->play->clearFocus();
+}
+
+
+void MainWindow::on_reset_clicked()
+{
+    ui->reset->clearFocus();
+}
+
+
+void MainWindow::on_amarelo_clicked()
+{
+    ui->amarelo->clearFocus();
+}
+
+
+void MainWindow::on_verde_clicked()
+{
+    ui->verde->clearFocus();
+}
+
+
+void MainWindow::on_vermelho_clicked()
+{
+    ui->vermelho->clearFocus();
+}
+
+
+void MainWindow::on_azul_clicked()
+{
+    ui->azul->clearFocus();
 }
 
