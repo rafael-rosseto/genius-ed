@@ -85,16 +85,3 @@ void MainWindow::on_reset_clicked()
     ui->vermelho->setStyleSheet("background: red");
     ui->azul->setStyleSheet("background: blue");
 }
-
-
-void MainWindow::on_amarelo_pressed()
-{
-    ui->amarelo->setStyleSheet("background: yellow");
-}
-
-
-void MainWindow::on_amarelo_released()
-{
-    ui->amarelo->setStyleSheet("background: palette(window)");
-}
-

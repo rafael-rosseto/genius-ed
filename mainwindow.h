@@ -32,6 +32,8 @@ private slots:
 
     void on_amarelo_pressed();
 
+    void on_reset_pressed();
+
 private:
     Ui::MainWindow *ui;
 };
