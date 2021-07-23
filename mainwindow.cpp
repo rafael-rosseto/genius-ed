@@ -1,12 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "estruturas.h"
 #include <QTime>
-/*
-setStyleSheet("QPushButton" "{" "background-color : lightblue;" "}"
-              "QPushButton::pressed" "{" "background-color : red;" "}"
-             );*/
 
-int level = 3;
+int level = 1;
+No ini = NULL, ult = NULL;
 
 void delay(int miliseconds)
 {
@@ -20,9 +18,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
+    srand(time(NULL));
     ui->play->clearFocus();
 
+    // Definir cores dos botões
     ui->amarelo->setStyleSheet("QPushButton" "{" "background-color : rgb(240,240,0);" "}"
                                "QPushButton::pressed" "{" "background-color : rgb(255,255,150);" "}"
                               );
@@ -35,6 +34,12 @@ MainWindow::MainWindow(QWidget *parent)
     ui->azul->setStyleSheet("QPushButton" "{" "background-color : blue;" "}"
                             "QPushButton::pressed" "{" "background-color : rgb(150,150,255);" "}"
                            );
+
+    // Inicializando o primeiro elemento
+    No p = (No)malloc(sizeof(Luzes));
+    p = criarNo();
+    ini = p;
+    ult = p;
 }
 
 MainWindow::~MainWindow()
@@ -45,13 +50,14 @@ MainWindow::~MainWindow()
 void MainWindow::on_play_clicked()
 {
     ui->play->clearFocus();
+    ini->luz = randLuz();
+    ult->luz = ini->luz;
 
     delay(800);
 
+    short aux = ini->luz;
     for(int i = 1; i <= level; i++)
     {
-        srand(time(0));
-        int aux = rand() % 4;
         if(aux == 0)
         {
             ui->amarelo->setStyleSheet("background: rgb(255,255,150)");
