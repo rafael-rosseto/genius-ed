@@ -119,7 +119,7 @@ void MainWindow::on_play_clicked()
                                         "}"
                                         "QPushButton::pressed"
                                         "{"
-                                        "background: rgb(255,100,100);"
+                                        "background: rgb(255,150,150);"
                                         "}");
         }
         else
@@ -142,32 +142,30 @@ void MainWindow::on_play_clicked()
 void MainWindow::on_reset_clicked()
 {
     ui->reset->clearFocus();
+    limparLista(&outputIni, &outputFim);
+    limparLista(&inputIni, &inputFim);
 }
 
 void MainWindow::on_amarelo_clicked()
 {
-    inputIni->luz = 0;
-    inputFim->luz = 0;
+    inserirLuz(0, &inputIni);
 }
 
 
 void MainWindow::on_verde_clicked()
 {
-    inputIni->luz = 1;
-    inputFim->luz = 1;
+    inserirLuz(1, &inputIni);
 }
 
 
 void MainWindow::on_vermelho_clicked()
 {
-    inputIni->luz = 2;
-    inputFim->luz = 2;
+    inserirLuz(2, &inputIni);
 }
 
 
 void MainWindow::on_azul_clicked()
 {
-    inputIni->luz = 3;
-    inputFim->luz = 3;
+    inserirLuz(3, &inputIni);
 }
 
