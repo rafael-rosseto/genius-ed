@@ -6,14 +6,14 @@
 #include <time.h>
 
 typedef struct NO_FILA {
-    int color;                      //linkar as cores com os números
+    int color;                      //linkar as cores com os nÃºmeros
     struct NO_FILA *next;
 } NO_FILA;
 
 typedef struct FILA {
     NO_FILA *head;
     NO_FILA *tail;
-    int level;                      //usado para comparar o input do usuário com as cores na sequência
+    int level;                      //usado para comparar o input do usuÃ¡rio com as cores na sequÃªncia
 } FILA;
 
 // functions
@@ -25,6 +25,7 @@ void iniciaFila(FILA *q) {
 
 void pushFila(int data, FILA *q) {
     NO_FILA *ptr = (NO_FILA*) malloc(sizeof(NO_FILA));
+    
     if(ptr == NULL) {
         printf("Erro de alocacao!\n");
         return;
@@ -63,6 +64,7 @@ void popFila(FILA *q) {
 
 void resetFila(FILA *q) {
     NO_FILA *ptr = q->head;
+    
     if(ptr != NULL) {
         while(ptr != NULL) {
             q->head = ptr->next;
@@ -81,6 +83,7 @@ void resetFila(FILA *q) {
 
 void printFila(FILA *q) {
     NO_FILA *ptr = q->head;
+    
     if(ptr != NULL) {
         while(ptr != NULL) {
             printf("%d ", ptr->color);
@@ -106,7 +109,7 @@ bool verificaFila(FILA *q) {
     return true;
 }
 
-void main(){
+void main() {
     srand(time(NULL));
 
     FILA *sequencia = (FILA*) malloc(sizeof(FILA));
@@ -134,7 +137,6 @@ void main(){
                 scanf("%d", &continuar);                //substituir por uma interface melhor
             }
         } while(continuar);
-
     }
     return;
 }
