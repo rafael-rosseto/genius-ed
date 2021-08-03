@@ -4,8 +4,8 @@
 #include <QTime>
 
 int level = 1;
-No outputIni = NULL, outputFim = NULL;
-No inputIni = NULL, inputFim = NULL;
+FILA *output = (FILA*) malloc(sizeof(FILA));
+FILA *input =  (FILA*) malloc(sizeof(FILA));
 
 void delay(int miliseconds)
 {
@@ -54,16 +54,8 @@ MainWindow::MainWindow(QWidget *parent)
                             "{"
                             "background-color : rgb(150,150,255);"
                             "}");
-
-    // outputInicializando o primeiro elemento
-    No p = (No)malloc(sizeof(Luzes));
-    p = criarNo();
-    outputIni = p;
-    outputFim = p;
-    No q = (No)malloc(sizeof(Luzes));
-    q = criarNo();
-    inputIni = p;
-    inputFim = p;
+    iniciaFila(output);
+    iniciaFila(input);
 }
 
 MainWindow::~MainWindow()
@@ -75,12 +67,11 @@ void MainWindow::on_play_clicked()
 {
     ui->play->clearFocus();
 
-    outputIni->luz = randLuz();
-    outputFim->luz = outputIni->luz;
+    pushFila(randLuz(), output);
 
     delay(800);
 
-    short aux = outputIni->luz;
+    int aux = output->level;
     for (int i = 1; i <= level; i++)
     {
         if (aux == 0)
@@ -142,30 +133,30 @@ void MainWindow::on_play_clicked()
 void MainWindow::on_reset_clicked()
 {
     ui->reset->clearFocus();
-    limparLista(&outputIni, &outputFim);
-    limparLista(&inputIni, &inputFim);
+    resetFila(input);
+    resetFila(output);
 }
 
 void MainWindow::on_amarelo_clicked()
 {
-    inserirLuz(0, &inputIni);
+    pushFila(0, input);
 }
 
 
 void MainWindow::on_verde_clicked()
 {
-    inserirLuz(1, &inputIni);
+    pushFila(1, input);
 }
 
 
 void MainWindow::on_vermelho_clicked()
 {
-    inserirLuz(2, &inputIni);
+    pushFila(2, input);
 }
 
 
 void MainWindow::on_azul_clicked()
 {
-    inserirLuz(3, &inputIni);
+    pushFila(3, input);
 }
 
