@@ -3,7 +3,7 @@
 #include "estruturas.h"
 #include <QTime>
 
-int level = 1;
+
 FILA *output = (FILA*) malloc(sizeof(FILA));
 FILA *input =  (FILA*) malloc(sizeof(FILA));
 
@@ -71,10 +71,12 @@ void MainWindow::on_play_clicked()
 
     delay(800);
 
-    int aux = output->level;
+    NO_FILA *aux = (NO_FILA*) malloc(sizeof(NO_FILA));
+    aux = output->head;
+
     for (int i = 1; i <= level; i++)
     {
-        if (aux == 0)
+        if (aux->color == 0)
         {
             ui->amarelo->setStyleSheet("background: rgb(255,255,150)");
             delay(600);
@@ -87,7 +89,7 @@ void MainWindow::on_play_clicked()
                                        "background-color : rgb(255,255,150);"
                                        "}");
         }
-        else if (aux == 1)
+        else if (aux->color == 1)
         {
             ui->verde->setStyleSheet("background: rgb(150,255,150)");
             delay(600);
@@ -100,7 +102,7 @@ void MainWindow::on_play_clicked()
                                      "background-color : rgb(150,255,150);"
                                      "}");
         }
-        else if (aux == 2)
+        else if (aux->color == 2)
         {
             ui->vermelho->setStyleSheet("background: rgb(255,150,150)");
             delay(600);
@@ -127,6 +129,7 @@ void MainWindow::on_play_clicked()
                                     "}");
         }
         delay(600);
+        aux= aux->next;
     }
 }
 
@@ -135,28 +138,89 @@ void MainWindow::on_reset_clicked()
     ui->reset->clearFocus();
     resetFila(input);
     resetFila(output);
+    level = 0;
 }
 
 void MainWindow::on_amarelo_clicked()
 {
     pushFila(0, input);
+    cont_glob++;
+    if(cont_glob == level)
+    {
+        printFila(input);
+        if(verificaFila(input, output))
+        {
+            cont_glob = 0;
+            ui->play->animateClick();
+            printf("teste2");
+        }
+        else
+        {
+            exit(-1);
+        }
+    }
 }
 
 
 void MainWindow::on_verde_clicked()
 {
     pushFila(1, input);
+    cont_glob++;
+    if(cont_glob == level)
+    {
+        printFila(input);
+        if(verificaFila(input, output))
+        {
+            cont_glob = 0;
+            ui->play->animateClick();
+            printf("teste");
+        }
+        else
+        {
+            exit(-1);
+        }
+    }
 }
 
 
 void MainWindow::on_vermelho_clicked()
 {
+    printFila(input);
     pushFila(2, input);
+    cont_glob++;
+    if(cont_glob == level)
+    {
+        if(verificaFila(input, output))
+        {
+            cont_glob = 0;
+            ui->play->animateClick();
+            printf("teste");
+        }
+        else
+        {
+            exit(-1);
+        }
+    }
 }
 
 
 void MainWindow::on_azul_clicked()
 {
+    printFila(input);
     pushFila(3, input);
+    cont_glob++;
+    if(cont_glob == level)
+    {
+        if(verificaFila(input, output))
+        {
+            cont_glob = 0;
+            ui->play->animateClick();
+            printf("teste");
+        }
+        else
+        {
+            exit(-1);
+        }
+    }
 }
 
