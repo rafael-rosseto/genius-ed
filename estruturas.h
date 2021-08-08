@@ -1,11 +1,14 @@
 #ifndef ESTRUTURAS_H
 #define ESTRUTURAS_H
 
-
+#include <QDebug>
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
 #include <time.h>
+
+int level = 0;
+int cont_glob = 0;
 
 typedef struct NO_FILA {
     int color;                      //linkar as cores com os números
@@ -34,7 +37,7 @@ void pushFila(int data, FILA *q) {
     NO_FILA *ptr = (NO_FILA*) malloc(sizeof(NO_FILA));
 
     if(ptr == NULL) {
-        printf("Erro de alocacao!\n");
+        qInfo("Erro de alocacao!\n");
         return;
     } else {
         ptr->color = data;
@@ -45,7 +48,7 @@ void pushFila(int data, FILA *q) {
             q->tail->next = ptr;
         }
         q->tail = ptr;
-        q->level += 1;
+        level += 1;
     }
 }
 
@@ -81,10 +84,10 @@ void resetFila(FILA *q) {
             ptr = q->head;
         }
         free(ptr);
-        printf("\nfila foi esvaziada!\n");
+        qInfo("\nfila foi esvaziada!\n");
     }
     else {
-        printf("\nfila ja estava vazia\n");
+        qInfo("\nfila ja estava vazia\n");
     }
     q->head = NULL;
     q->tail = NULL;
@@ -95,25 +98,25 @@ void printFila(FILA *q) {
 
     if(ptr != NULL) {
         while(ptr != NULL) {
-            printf("%d ", ptr->color);
+            qInfo("%d ", ptr->color);
             ptr = ptr->next;
         }
     } else {
-        printf("\nA fila esta vazia!\n");
+        qInfo("\nA fila esta vazia!\n");
     }
 }
 
-bool verificaFila(FILA *q) {
-    int cont, data;
-    NO_FILA *ptr = q->head;
+bool verificaFila(FILA *input, FILA *output) {
+    int cont;
+    NO_FILA *ptr_in = input->head;
+    NO_FILA *ptr_out = output->head;
 
-    for(cont=0; cont < q->level; cont++) {
-        printf("\n%do: ", cont+1);
-        scanf("%d", &data);
-        if(data != ptr->color) {
+    for(cont=0; cont < level; cont++) {
+        if(ptr_in->color != ptr_out->color) {
             return false;
         }
-        ptr = ptr->next;
+        ptr_in = ptr_in->next;
+        ptr_out = ptr_out->next;
     }
     return true;
 }
