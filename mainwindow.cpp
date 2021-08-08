@@ -6,6 +6,7 @@
 
 FILA *output = (FILA*) malloc(sizeof(FILA));
 FILA *input =  (FILA*) malloc(sizeof(FILA));
+NO_FILA *aux = (NO_FILA*) malloc(sizeof(NO_FILA));
 
 void delay(int miliseconds)
 {
@@ -71,7 +72,6 @@ void MainWindow::on_play_clicked()
 
     delay(800);
 
-    NO_FILA *aux = (NO_FILA*) malloc(sizeof(NO_FILA));
     aux = output->head;
 
     for (int i = 1; i <= level; i++)
@@ -138,21 +138,23 @@ void MainWindow::on_reset_clicked()
     ui->reset->clearFocus();
     resetFila(input);
     resetFila(output);
-    level = 0;
+    level = 1;
 }
 
 void MainWindow::on_amarelo_clicked()
 {
     pushFila(0, input);
+    printFila(input);
     cont_glob++;
     if(cont_glob == level)
     {
-        printFila(input);
         if(verificaFila(input, output))
         {
             cont_glob = 0;
             ui->play->animateClick();
-            printf("teste2");
+            qInfo("verificou");
+            level++;
+            resetFila(input);
         }
         else
         {
@@ -165,15 +167,17 @@ void MainWindow::on_amarelo_clicked()
 void MainWindow::on_verde_clicked()
 {
     pushFila(1, input);
+    printFila(input);
     cont_glob++;
     if(cont_glob == level)
     {
-        printFila(input);
         if(verificaFila(input, output))
         {
             cont_glob = 0;
             ui->play->animateClick();
-            printf("teste");
+            qInfo("verificou");
+            level++;
+            resetFila(input);
         }
         else
         {
@@ -185,8 +189,8 @@ void MainWindow::on_verde_clicked()
 
 void MainWindow::on_vermelho_clicked()
 {
-    printFila(input);
     pushFila(2, input);
+    printFila(input);
     cont_glob++;
     if(cont_glob == level)
     {
@@ -194,7 +198,9 @@ void MainWindow::on_vermelho_clicked()
         {
             cont_glob = 0;
             ui->play->animateClick();
-            printf("teste");
+            qInfo("verificou");
+            level++;
+            resetFila(input);
         }
         else
         {
@@ -206,8 +212,8 @@ void MainWindow::on_vermelho_clicked()
 
 void MainWindow::on_azul_clicked()
 {
-    printFila(input);
     pushFila(3, input);
+    printFila(input);
     cont_glob++;
     if(cont_glob == level)
     {
@@ -215,7 +221,9 @@ void MainWindow::on_azul_clicked()
         {
             cont_glob = 0;
             ui->play->animateClick();
-            printf("teste");
+            qInfo("verificou");
+            level++;
+            resetFila(input);
         }
         else
         {

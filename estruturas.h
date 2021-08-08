@@ -7,7 +7,7 @@
 #include <stdbool.h>
 #include <time.h>
 
-int level = 0;
+int level = 1;
 int cont_glob = 0;
 
 typedef struct NO_FILA {
@@ -48,7 +48,7 @@ void pushFila(int data, FILA *q) {
             q->tail->next = ptr;
         }
         q->tail = ptr;
-        level += 1;
+        //level += 1;
     }
 }
 
@@ -111,7 +111,7 @@ bool verificaFila(FILA *input, FILA *output) {
     NO_FILA *ptr_in = input->head;
     NO_FILA *ptr_out = output->head;
 
-    for(cont=0; cont < level; cont++) {
+    for(cont=1; cont <= level; cont++) {
         if(ptr_in->color != ptr_out->color) {
             return false;
         }
