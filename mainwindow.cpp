@@ -156,37 +156,21 @@ void MainWindow::on_reset_clicked()
 
 void MainWindow::on_amarelo_clicked()
 {
-    pushFila(0, input);
-    printFila(input);
-    cont_glob++;
-    if(verificaFila(input, output))
+    if(output->head != NULL)
     {
-        if(cont_glob == level)
-        {
-            cont_glob = 0;
-            ui->play->animateClick();
-            qInfo("verificou");
-            level++;
-            resetFila(input);
-        }
-    }
-    else
-    {
-        ui->reset->animateClick();
-        qInfo("resetou");
-        GameOverAlert x;
-        x.exec();
-    }
-    /*
-    if(cont_glob == level)
-    {
+        pushFila(0, input);
+        printFila(input);
+        cont_glob++;
         if(verificaFila(input, output))
         {
-            cont_glob = 0;
-            ui->play->animateClick();
-            qInfo("verificou");
-            level++;
-            resetFila(input);
+            if(cont_glob == level)
+            {
+                cont_glob = 0;
+                ui->play->animateClick();
+                qInfo("verificou");
+                level++;
+                resetFila(input);
+            }
         }
         else
         {
@@ -195,84 +179,93 @@ void MainWindow::on_amarelo_clicked()
             GameOverAlert x;
             x.exec();
         }
-    }*/
+    }
 }
 
 
 void MainWindow::on_verde_clicked()
 {
-    pushFila(1, input);
-    printFila(input);
-    cont_glob++;
-    if(verificaFila(input, output))
+    if(output->head != NULL)
     {
-        if(cont_glob == level)
+        pushFila(1, input);
+        printFila(input);
+        cont_glob++;
+        if(verificaFila(input, output))
         {
-            cont_glob = 0;
-            ui->play->animateClick();
-            qInfo("verificou");
-            level++;
-            resetFila(input);
+            if(cont_glob == level)
+            {
+                cont_glob = 0;
+                ui->play->animateClick();
+                qInfo("verificou");
+                level++;
+                resetFila(input);
+            }
         }
-    }
-    else
-    {
-        ui->reset->animateClick();
-        qInfo("resetou");
-        GameOverAlert x;
-        x.exec();
+        else
+        {
+            ui->reset->animateClick();
+            qInfo("resetou");
+            GameOverAlert x;
+            x.exec();
+        }
     }
 }
 
 
 void MainWindow::on_vermelho_clicked()
 {
-    pushFila(2, input);
-    printFila(input);
-    cont_glob++;
-    if(verificaFila(input, output))
+    if(output->head != NULL)
     {
-        if(cont_glob == level)
+        pushFila(2, input);
+        printFila(input);
+        cont_glob++;
+        if(verificaFila(input, output))
         {
-            cont_glob = 0;
-            ui->play->animateClick();
-            qInfo("verificou");
-            level++;
-            resetFila(input);
+            if(cont_glob == level)
+            {
+                cont_glob = 0;
+                ui->play->animateClick();
+                qInfo("verificou");
+                level++;
+                resetFila(input);
+            }
         }
-    }
-    else
-    {
-        ui->reset->animateClick();
-        qInfo("resetou");
-        GameOverAlert x;
-        x.exec();
+        else
+        {
+            ui->reset->animateClick();
+            qInfo("resetou");
+            GameOverAlert x;
+            x.exec();
+        }
     }
 }
 
 
 void MainWindow::on_azul_clicked()
 {
-    pushFila(3, input);
-    printFila(input);
-    cont_glob++;
-    if(verificaFila(input, output))
+    if(output->head != NULL)
     {
-        if(cont_glob == level)
+        pushFila(3, input);
+        printFila(input);
+        cont_glob++;
+        if(verificaFila(input, output))
         {
-            cont_glob = 0;
-            ui->play->animateClick();
-            qInfo("verificou");
-            level++;
-            resetFila(input);
+            if(cont_glob == level)
+            {
+                cont_glob = 0;
+                ui->play->animateClick();
+                qInfo("verificou");
+                level++;
+                resetFila(input);
+            }
         }
-    }
-    else
-    {
-        ui->reset->animateClick();
-        qInfo("resetou");
-        GameOverAlert x;
-        x.exec();
+        else
+        {
+            ui->reset->animateClick();
+            qInfo("resetou");
+            GameOverAlert x;
+            x.exec();
+        }
     }
 }
 
